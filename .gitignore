@@ -1,5 +1,15 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*.env
+*/__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.vscode
+*.idea
+*Thumbs.db
+*.DS_Store
+*pyproject.toml
+*poetry.lock
 *.py[cod]
 *$py.class
 
