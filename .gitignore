@@ -18,7 +18,7 @@
 *db.sqlite3-journal
 *_migrations/*
 !*_migrations/__init__.py
-
+*media/
 # C extensions
 *.so
 
