@@ -2,9 +2,8 @@ from django.db import models
 
 
 class Pokemon(models.Model):
-    id = models.AutoField(primary_key=True)
     title_ru = models.CharField(
-        max_length=50, default='MissingNo', verbose_name='Название покемона (рус.)')
+        max_length=50, verbose_name='Название покемона (рус.)')
     title_en = models.CharField(
         max_length=50, blank=True, verbose_name='Название покемона (анг.)')
     title_jp = models.CharField(
@@ -13,13 +12,11 @@ class Pokemon(models.Model):
         blank=True, verbose_name='Описание покемона')
     img_url = models.ImageField(blank=True,
                                 null=True,
-                                upload_to='media/',
+                                upload_to='sprites/',
                                 verbose_name='Ссылка на изображение покемона',
                                 )
     previous_evolution = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
-                                           related_name='pokemon_pre_evo', verbose_name='Предыдущая стадия развития покемона')
-    next_evolutions = models.ManyToManyField('self', symmetrical=False, blank=True,
-                                             related_name='pokemon_next_evo', verbose_name='Следующие стадии развития покемона')
+                                           related_name='pokemon_next_evo', verbose_name='Предыдущая стадия развития покемона')
     element_types = models.ManyToManyField(
         'Element', symmetrical=False, blank=True, related_name='elements', verbose_name='Тип покемона')
 
@@ -29,7 +26,7 @@ class Pokemon(models.Model):
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(
-        Pokemon, on_delete=models.CASCADE, blank=False, related_name='pokemon_type', verbose_name='Вид покемона')
+        Pokemon, on_delete=models.CASCADE, blank=False, related_name='pokemon_entities', verbose_name='Вид покемона')
     latitude = models.FloatField(
         blank=True, null=True, verbose_name='Координаты: широта')
     longitude = models.FloatField(
@@ -59,7 +56,7 @@ class Element(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название типа')
     img = models.ImageField(blank=True,
                             null=True,
-                            upload_to='media/',
+                            upload_to='sprites/',
                             verbose_name='Иконка типа покемона')
     strong_against = models.TextField(blank=True, verbose_name='Описание типа')
 
