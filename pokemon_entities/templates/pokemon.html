@@ -18,7 +18,9 @@
       </ul>
       <div class="d-flex mt-5 row">
         <div class="pull-left mr-2 float-left ml-4">
-          <img src="/media/{{ pokemon.img_url }}" style="height:200px; width:200px" />
+          {% if pokemon.img_url %}
+            <img src="{{ pokemon.img_url.url }}" style="height:200px; width:200px" />
+          {% endif %}
         </div>
         <div class="m-2 ml-4 col-11 col-sm-8 col-lg-8 col-xl-8">
           <h1>{{ pokemon.title_ru }}</h1>
@@ -35,7 +37,9 @@
                     <div class="img-thumbnail">
                       <a href="{% url 'pokemon' pokemon.previous_evolution.id %}">
                         <div class="d-flex justify-content-center">
-                          <img class="pull-left mr-2 float-left" src="/media/{{ pokemon.previous_evolution.img_url }}" style="height:50px; width:50px" />
+                          {% if pokemon.previous_evolution.img_url %}
+                            <img class="pull-left mr-2 float-left" src="{{ pokemon.previous_evolution.img_url.url }}" style="height:50px; width:50px" />
+                          {% endif %}
                           <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{ pokemon.previous_evolution.title_ru }}</p>
                         </div>
                       </a>
@@ -49,7 +53,9 @@
                       <div class="img-thumbnail mb-3">
                         <a href="{% url 'pokemon' evolution.id %}">
                           <div class="d-flex justify-content-center">
-                            <img class="pull-left mr-2 float-left" src="/media/{{ evolution.img_url }}" style="height:50px; width:50px" />
+                            {% if evolution.img_url %}
+                              <img class="pull-left mr-2 float-left" src="{{ evolution.img_url.url }}" style="height:50px; width:50px" />
+                            {% endif %}
                             <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{ evolution.title_ru }}</p>
                           </div>
                         </a>
@@ -67,7 +73,9 @@
               <h4>Стихии покемона</h4>
               {% for type in requested_types %}
                 <div>
-                  <img class="pull-left mr-2 float-left" style="height:20px;width:100px;" src="/media/{{ type.img }}" />
+                  {% if type.img %}
+                    <img class="pull-left mr-2 float-left" style="height:20px;width:100px;" src="{{ type.img.url }}" />
+                  {% endif %}
                   <p>{{ type.title }}, Силен против {{ type.strong_against }}</p>
                 </div>
               {% endfor %}
