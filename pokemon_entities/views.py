@@ -60,7 +60,7 @@ def show_pokemon(request, pokemon_id):
     time_now = get_time.now()
 
     requested_pokemon = get_object_or_404(Pokemon.objects.all(), id=pokemon_id)
-    requested_evolutions = requested_pokemon.pokemon_next_evo.all()
+    requested_evolutions = requested_pokemon.next_evolutions.all()
     requested_types = requested_pokemon.element_types.all()
 
     requested_pokemon_entities = PokemonEntity.objects.filter(
