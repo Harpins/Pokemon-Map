@@ -18,7 +18,7 @@ class Pokemon(models.Model):
     previous_evolution = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                            related_name='next_evolutions', verbose_name='Предыдущая стадия развития покемона')
     element_types = models.ManyToManyField(
-        'Element', symmetrical=False, blank=True, related_name='elements', verbose_name='Тип покемона')
+        'Element', symmetrical=False, blank=True, related_name='pokemons', verbose_name='Тип покемона')
 
     def __str__(self):
         return f'{self.title_ru}:{self.id}'
