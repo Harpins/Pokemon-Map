@@ -16,7 +16,7 @@ class Pokemon(models.Model):
                                 verbose_name='Ссылка на изображение покемона',
                                 )
     previous_evolution = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
-                                           related_name='pokemon_next_evo', verbose_name='Предыдущая стадия развития покемона')
+                                           related_name='next_evolutions', verbose_name='Предыдущая стадия развития покемона')
     element_types = models.ManyToManyField(
         'Element', symmetrical=False, blank=True, related_name='elements', verbose_name='Тип покемона')
 
@@ -26,7 +26,7 @@ class Pokemon(models.Model):
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(
-        Pokemon, on_delete=models.CASCADE, blank=False, related_name='pokemon_entities', verbose_name='Вид покемона')
+        Pokemon, on_delete=models.CASCADE, blank=False, related_name='entities', verbose_name='Вид покемона')
     latitude = models.FloatField(
         blank=True, null=True, verbose_name='Координаты: широта')
     longitude = models.FloatField(
